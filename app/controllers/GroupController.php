@@ -1,9 +1,18 @@
 <?php
 class GroupController extends BaseController{
 	public function Apple(){
-		return  View::make('group.apple');
+		$posts = Status::where('primarygroup', '=', 'Apple')->get();
+		
+		return  View::make('group.apple')
+				->with('posts', $posts);
 	}
 	public function Ball(){
-		return View::make('group.ball');
+		$posts = Status::where('primarygroup', '=', 'Ball')->get();
+
+		return  View::make('group.ball')
+				->with('posts', $posts);
+	}
+	public function group(){
+		return View::make('group.group');
 	}
 }

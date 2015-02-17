@@ -14,6 +14,8 @@ Route::get('/user/{username}',array(
 //Authenticated group
 Route::group(array('before' => 'auth'),function(){
 
+
+
 	//Change password(GET)
 	Route::get('/account/change-password', array(
 		'as' => 'account-change-password',
@@ -37,7 +39,12 @@ Route::group(array('before' => 'auth'),function(){
 		'as' => 'account-sign-out',
 		'uses' => 'AccountController@getSignOut'
 	));
+	//redirect to group selection
 
+	Route::get('/group', array(
+		'as' => 'group',
+		'uses' => 'GroupController@group'
+	));
 	//Apple Group
 	Route::get('/group/apple', array(
 		'as' => 'group-apple',

@@ -23,4 +23,5 @@ class StatusController extends BaseController{
 		 	}
 		 return Redirect::route('home')->with('global', 'Couldn`t be posted');
 	}
+	
 }
