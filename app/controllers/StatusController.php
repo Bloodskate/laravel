@@ -4,18 +4,16 @@ class StatusController extends BaseController{
 		return View::make('status.updatestatus');
 	}
 
-	public function postStatus(){
+	public function postStatus($presentgroup){
 		$user_id = Auth::user()->id;
 		$post =  Input::get('status');
 
-		$group = Group::where('foreignid', '=', $user_id);
-		$group = $group->first();
-		$primarygroup = $group->primarygroup;
+		$ongroup = $presentgroup;
 
 		$status = Status::create(array(
 			'user_id' => $user_id,
 			'post' => $post,
-			'primarygroup' => $primarygroup
+			'ongroup' => $ongroup
 		));
 		if($status->save()){
 		 		return Redirect::route('home')->with('global', 'Posted');

@@ -5,7 +5,7 @@ class ProfileController extends BaseController{
 		
 		if($user->count()){
 		$user = $user->first();
-		$group = Group::where('foreignid', '=', $user->id);
+		$group = Group::where('user_id', '=', $user->id);
 		$group = $group->first();
 		$posts = Status::where('user_id', '=', $user->id)->get();
 		$posts = $posts->sortByDesc('created_at');

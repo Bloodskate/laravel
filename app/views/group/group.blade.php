@@ -3,8 +3,12 @@
 @section('content')
 
 <hr><hr>
-	<ul>
-		<li><a href = "{{URL::route('group-apple')}}"> Apple</a>
-		<li><a href = "{{URL::route('group-ball')}}"> Ball</a>
-	</ul>
+
+
+	
+	@foreach ( $posts as $post )
+		@if($post->ongroup==$ongroup)
+		<p><h1><a href= "{{URL::route('profile-user',$post->user->username)}}"> {{$post->user->username}}</h1> </a>             {{ $post->post }}</p><hr>
+		@endif
+	@endforeach
 @stop

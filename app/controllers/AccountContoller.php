@@ -62,7 +62,7 @@ class AccountController extends BaseController {
 			$email 		= Input::get('email');
 			$username 	= Input::get('username');
 			$password 	= Input::get('password');
-			$primarygroup = Input::get('primarygroup');
+			$group1 = Input::get('group1');
 			//Activation code
 			$code 		= str_random(60);
 
@@ -73,10 +73,10 @@ class AccountController extends BaseController {
 				'code' => $code,
 				'active' => 0
 				));
-			$foreignid = $user->id;
+			$uaer_id = $user->id;
 		 		$group = Group::create(array(
-		 				'foreignid' => $foreignid,
-		 				'primarygroup' => $primarygroup
+		 				'user_id' => $user_id,
+		 				'group1' => $group1
 		 			));
 			if($user){
 

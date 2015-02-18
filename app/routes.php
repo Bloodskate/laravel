@@ -39,9 +39,16 @@ Route::group(array('before' => 'auth'),function(){
 		'as' => 'account-sign-out',
 		'uses' => 'AccountController@getSignOut'
 	));
+
+	//redirect to group all
+
+	Route::get('/groups/', array(
+		'as' => 'groups',
+		'uses' => 'GroupController@groups'
+	));
 	//redirect to group selection
 
-	Route::get('/group', array(
+	Route::get('/group/{ongroup}', array(
 		'as' => 'group',
 		'uses' => 'GroupController@group'
 	));
@@ -64,7 +71,7 @@ Route::group(array('before' => 'auth'),function(){
 	));
 
 	//Status (Post)
-	Route::post('status/update', array(
+	Route::post('status/update/{presentgroup}', array(
 		'as' => 'status-update-post',
 		'uses' => 'StatusController@postStatus'
 	));

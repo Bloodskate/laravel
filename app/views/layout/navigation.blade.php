@@ -4,7 +4,7 @@
 		@if(Auth::check())
 			<li><a href="{{URL::route('account-sign-out')}}">Sign Out</a></li>
 			<li><a href="{{URL::route('profile-user',Auth::user()->username)}}">Profile</a></li>
-			<li><a href="{{URL::route('group')}}">Groups</a></li>
+			<li><a href="{{URL::route('groups')}}">Groups</a></li>
 			
 		@else
 			
