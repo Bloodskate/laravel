@@ -5,20 +5,22 @@ class ProfileController extends BaseController{
 		
 		if($user->count()){
 		$user = $user->first();
-		$group = Group::where('user_id', '=', $user->id);
-		$group = $group->first();
 		$posts = Status::where('user_id', '=', $user->id)->get();
 		$posts = $posts->sortByDesc('created_at');
 		
-		return  View::make('profile.user')
+		return  View::make('profile.profile')
 				->with('user', $user)
-				->with('group', $group)
 				->with('posts', $posts);
 
 		}
 		
 		return App::abort(404);
 
+	}
+
+	public function allusers(){
+		$users = User::all();
+		return View::make('profile.users')->with('users', $users);
 	}
 	
 }

@@ -14,7 +14,42 @@ Route::get('/user/{username}',array(
 //Authenticated group
 Route::group(array('before' => 'auth'),function(){
 
+	//Reply(get)
+	Route::get('/user/reply/{postid}', array (
+		'as' => 'reply',
+		'uses' => 'StatusController@getReply'
+	));
+	
+	//Reply(post)
+	Route::post('/user/{postid}', array (
+		'as' => 'reply-post',
+		'uses' => 'StatusController@postReply'
+	));
 
+	//Group
+	Route::get('group/{ongroup}', array(
+		'as' => 'group',
+		'uses' => 'GroupController@group'
+	));
+
+	//All groups
+	Route::get('/group/',array(
+		'as' => 'allgroups',
+		'uses' => 'GroupController@allgroups'
+	));
+
+
+	//All users
+	Route::get('profile/users', array(
+		'as' => 'profile-users',
+		'uses' => 'ProfileController@allusers'
+	));
+
+	//Delete post
+	Route::get('status/delete/{post_id}', array(
+		'as' => 'status-delete',
+		'uses' => 'StatusController@getDelete'
+	));
 
 	//Change password(GET)
 	Route::get('/account/change-password', array(
@@ -40,38 +75,10 @@ Route::group(array('before' => 'auth'),function(){
 		'uses' => 'AccountController@getSignOut'
 	));
 
-	//redirect to group all
 
-	Route::get('/groups/', array(
-		'as' => 'groups',
-		'uses' => 'GroupController@groups'
-	));
-	//redirect to group selection
-
-	Route::get('/group/{ongroup}', array(
-		'as' => 'group',
-		'uses' => 'GroupController@group'
-	));
-	//Apple Group
-	Route::get('/group/apple', array(
-		'as' => 'group-apple',
-		'uses' => 'GroupController@Apple'
-	));
-
-	//Ball Group
-	Route::get('/group/ball', array(
-		'as' => 'group-ball',
-		'uses' => 'GroupController@Ball'
-	));
-
-	//Status (GET)
-	Route::get('status/update', array(
-		'as' => 'status-update',
-		'uses' => 'StatusController@getStatus'
-	));
 
 	//Status (Post)
-	Route::post('status/update/{presentgroup}', array(
+	Route::post('status/update', array(
 		'as' => 'status-update-post',
 		'uses' => 'StatusController@postStatus'
 	));

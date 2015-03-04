@@ -22,6 +22,16 @@
 			@endif
 		
 		</div>
+
+		<div class = "field">
+		
+			Full Name: <input type = 'text' name = 'name'{{ (Input::old('name')) ? ' value = "'. e(Input::old('name')) .'"' : ''}}>
+		
+			@if($errors->has('name'))
+				{{ $errors->first('name')}}
+			@endif
+		
+		</div>
 		
 		<div class = "field">
 		
@@ -41,12 +51,6 @@
 				{{ $errors->first('password_again')}}
 			@endif
 		
-		</div>
-
-		<div class = "field">
-			Primary Choice
-				<input type="radio" name="primarygroup" value="Apple"> Apple<br>
-				<input type="radio" name="primarygroup" value="Ball" checked> Ball<br>
 		</div>
 		<input type = "submit" value = "create account">
 		{{ Form::token()}}

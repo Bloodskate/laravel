@@ -7,6 +7,8 @@ class BaseController extends Controller {
 	 *
 	 * @return void
 	 */
+
+	
 	protected function setupLayout()
 	{
 		if ( ! is_null($this->layout))
@@ -16,3 +18,10 @@ class BaseController extends Controller {
 	}
 
 }
+$GLOBALS['groups'] = array(
+		'group1' => 'Apple',
+		'group2' => 'Ball',
+		'group3' => 'Cat',
+		'group4' => 'Dog',
+		'group5' => 'Elephant'
+);

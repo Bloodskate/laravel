@@ -8,26 +8,37 @@ class AccountController extends BaseController {
 	public function postSignIn(){
 		$validator = Validator::make(Input::all(), 
 			array(
-				'email' 			=> 'required|email',
+				'email' 			=> 'required',
 				'password' 			=> 'required',
 				));
+	
 		if($validator->fails()){
-			return Redirect::route('account-sign-in')
+			return Redirect::route('home')
 			->withErrors($validator)
 			->withInput();
 		}
+		
 		else{
 
 			$remember = (Input::has('remember')) ? true : false;
 
 			$auth = Auth::attempt(array(
 				'email' => Input::get('email'),
+
 				'password' => Input::get('password'),
 				'active' => 1
 				), $remember);
-			if($auth){
+			$auth1 = Auth::attempt(array(
+				'username' => Input::get('email'),
+
+				'password' => Input::get('password'),
+				'active' => 1
+				), $remember);
+
+			if($auth or $auth1){
 				return Redirect::intended('/');
 			}
+			
 			else{
 				return  Redirect::route('home')
 						->with('global', 'Incorrect email or password');
@@ -50,6 +61,7 @@ class AccountController extends BaseController {
 			array(
 				'email' 			=> 'required|max:50|email|unique:users',
 				'username' 			=> 'required|max:20|min:3|unique:users',
+				'name'				=> 'required',
 				'password' 			=> 'required|min:6',
 				'password_again' 	=> 'required|same:password'
 				));
@@ -62,7 +74,7 @@ class AccountController extends BaseController {
 			$email 		= Input::get('email');
 			$username 	= Input::get('username');
 			$password 	= Input::get('password');
-			$group1 = Input::get('group1');
+			$name		= Input::get('name');
 			//Activation code
 			$code 		= str_random(60);
 
@@ -70,14 +82,10 @@ class AccountController extends BaseController {
 				'email' => $email,
 				'username' => $username,
 				'password' => Hash::make($password),
+				'name' => $name,
 				'code' => $code,
 				'active' => 0
 				));
-			$uaer_id = $user->id;
-		 		$group = Group::create(array(
-		 				'user_id' => $user_id,
-		 				'group1' => $group1
-		 			));
 			if($user){
 
 				Mail::send('emails.auth.activate', array(
