@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration {
 			$t->increments('id');
 			$t->integer('user_id');
 			$t->string('ongroup');
-			$t->text('posts');
+			$t->text('post');
 			$t->timestamps();
 		});
 	}

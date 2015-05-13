@@ -1,6 +1,6 @@
 <?php
 
-class GroupController extends BaseController{
+/*class GroupController extends BaseController{
 	public function group($ongroup){
 		$group = Allgroups::where('group', '=', $ongroup)->get();
 		if($group->count()){
@@ -15,4 +15,4 @@ class GroupController extends BaseController{
 		$all = Allgroups::all();
 		return View::make('group.allgroups')->with('all', $all);
 	}
-}
+}*/
